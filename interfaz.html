@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMBATE ZOETIC - Ventas Online</title>
+    <link rel="stylesheet" href="assets/css/interfaz style.css"> 
+    <style>
+     .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: #000000;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .modal.activo {
+            display: block;
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-footer {
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.activo {
+            display: block;
+        }   
+    </style>
+</head>
+
+
+<body>
+
+    <header class="header">
+        <img class="bg" src="assets/images/fondo.png" alt="Fondo">
+        <div class="menu container">
+            <a href="#" class="logo">COMBATE ZOETIC</a>
+            <input type="checkbox" id="menu">
+            <label for="menu">
+                <img src="assets/images/menu.png" class="menu-icono" alt="Menú">
+            </label>
+            <nav class="navbar">
+                <ul>
+
+                    <li><a href="#" class="btn-nav">Categorías</a></li>
+                    <li><a href="#" class="btn-nav">Ofertas</a></li>
+                    <li><a href="#" class="btn-nav">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos..." class="search-input">
+                <button class="search-btn">Buscar</button>
+            </div>
+            <div class="carrito">
+                <button id="btn-carrito">
+                    <img src="assets/images/car.svg" id="img-carrito" alt="Carrito">
+                    Carrito (<span id="cantidad-carrito">0</span>)
+                </button>
+                <div id="carrito">
+                    <table id="lista-carrito">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
+                </div>
+            </div>
+        </div>
+        <div class="auth-buttons">
+            <button onclick="mostrarModal('modalLogin')">Iniciar Sesión</button>
+            <button onclick="mostrarModal('modalRegistro')">Registrarse</button>
+        </div>
+         <!--Modal de Login -->
+    <div id="modalLogin" class="modal">
+        <div class="modal-header">Iniciar Sesión</div>
+        <form action="procesar_login.php" method="POST">
+            <label for="loginCorreo">Correo Electrónico:</label>
+            <input type="email" id="loginCorreo" name="correo" required>
+            <br>
+            <label for="loginContrasena">Contraseña:</label>
+            <input type="password" id="loginContrasena" name="contrasena" required>
+            <br>
+            <button type="submit">Entrar</button>
+        </form>
+        <div class="modal-footer">
+            <button onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+    <!-- Modal de Registro -->
+    <div id="modalRegistro" class="modal">
+        <div class="modal-header">Registrarse</div>
+        <form action="procesar_registro.php" method="POST">
+            <label for="registroNombre">Nombre:</label>
+            <input type="text" id="registroNombre" name="nombre" required>
+            <br>
+            <label for="registroCorreo">Correo Electrónico:</label>
+            <input type="email" id="registroCorreo" name="correo" required>
+            <br>
+            <label for="registroContrasena">Contraseña:</label>
+            <input type="password" id="registroContrasena" name="contrasena" required>
+            <br>
+            <button type="submit">Registrar</button>
+        </form>
+        <div class="modal-footer">
+            <button onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+    <!-- Capa de fondo para los modales -->
+    <div id="overlay" class="overlay"></div>
+
+
+        <div class="header-content container">
+            <div class="header-txt">
+                <h1>POWER REPS</h1>
+                <h2><span>Equipos Esenciales para Potenciar tu Entrenamiento</span></h2>
+                <p>
+                    Descubre las mejores opciones en equipos para entrenar y mantenerte en forma.
+                </p>
+                <a href="#" class="btn-1">Ver más</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <!-- Sección de Categorías -->
+        <section class="categories">
+            <h2>Categorías</h2>
+            <div class="category-grid">
+                <button class="category-item">
+                    <img src="assets/images/b1.png" alt="Categoría 1">
+                    <h3>Pesas</h3>
+                </button>
+                <button class="category-item">
+                    <img src="assets/images/b2.png" alt="Categoría 2">
+                    <h3>Accesorios</h3>
+                </button>
+                <button class="category-item">
+                    <img src="assets/images/b3.png" alt="Categoría 3">
+                    <h3>Ropa</h3>
+                </button>
+                <button class="category-item">
+                    <img src="assets/images/b4.png" alt="Categoría 4">
+                    <h3>Nutrición</h3>
+                </button>
+            </div>
+        </section>
+
+        <!-- Productos -->
+        <section id="productos" class="productos">
+            <h2>Productos</h2>
+            <div class="box-container">
+                <div class="box">
+                    <img src="assets/images/pla1.png" alt="Producto 1">
+                    <h3>Mancuernas Fijas</h3>
+                    <p class="texto">Duraderas y listas para entrenar.</p>
+                    <button class="btn-3">Agregar al carrito</button>
+                </div>
+                <div class="box">
+                    <img src="assets/images/pla2.png" alt="Producto 2">
+                    <h3>Mancuernas Hexagonales</h3>
+                    <p class="texto">Antideslizantes y seguras.</p>
+                    <button class="btn-3">Agregar al carrito</button>
+                </div>
+                <div class="box">
+                    <img src="assets/images/pla3.png" alt="Producto 3">
+                    <h3>Mancuernas de Neopreno</h3>
+                    <p class="texto">Comodidad y estilo.</p>
+                    <button class="btn-3">Agregar al carrito</button>
+                </div>
+                <div class="box">
+                    <img src="assets/images/pla4.png" alt="Producto 4">
+                    <h3>Mancuernas Ajustables</h3>
+                    <p class="texto">Versatilidad para tu entrenamiento.</p>
+                    <button class="btn-3">Agregar al carrito</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content container">
+            <div class="link">
+                <h3>Acerca de nosotros</h3>
+                <ul>
+                    <li><a href="#">Nuestra historia</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Políticas de privacidad</a></li>
+                </ul>
+            </div>
+            <div class="link">
+                <h3>Contacto</h3>
+                <ul>
+                    <li><a href="#">Ayuda</a></li>
+                    <li><a href="#">Soporte</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function mostrarModal(id) {
+            document.getElementById(id).classList.add('activo');
+            document.getElementById('overlay').classList.add('activo');
+        }
+
+        function cerrarModal() {
+            document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('activo'));
+            document.getElementById('overlay').classList.remove('activo');
+        }
+    </script>
+
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
